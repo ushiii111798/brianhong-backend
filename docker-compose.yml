@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  filebeat_access:
+    build:
+      context: ./filebeat_access
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - log-data:/var/log/server
+      - /cert:/cert
+    container_name: filebeat_access
+
+  filebeat_plain:
+    build:
+      context: ./filebeat_plain
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - log-data:/var/log/server
+      - /cert:/cert
+    container_name: filebeat_plain
+
+  filebeat_bdscc:
+    build:
+      context: ./filebeat_bdscc
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - log-data:/var/log/server
+      - /cert:/cert
+    container_name: filebeat_bdscc
+
+  my-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - log-data:/data/logs
+      - ./backend/config:/data/config
+      - ./backend/src:/data/src
+      - ./backend/models:/data/models
+    container_name: backend
+    ports:
+      - 3000:3000
+
+volumes:
+  log-data:

@@ -1,0 +1,20 @@
+{
+    "name": "day09-mini-project",
+    "version": "1.0.0",
+    "description": "mini-project",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js"
+    },
+    "author": "Brian Hong",
+    "license": "MIT",
+    "type": "module",
+    "dependencies": {
+        "dotenv": "^16.0.2",
+        "mongoose": "^6.6.0",
+        "mongoose-auto-increment": "^5.0.1",
+        "nodemon": "^2.0.19",
+        "normalize-mongoose": "^1.0.0",
+        "puppeteer": "^17.1.3"
+    }
+}

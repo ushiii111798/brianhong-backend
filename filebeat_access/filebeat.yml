@@ -1,0 +1,15 @@
+fields_under_root: true
+fields:
+  source: BRIAN-API
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - '/var/log/server/apiAccess/*/*.log'
+
+output.logstash:
+  hosts: ['graylog.brian-hong.tech:5044']
+  ssl.certificate_authorities: ['/cert/fullchain.pem']
+  ssl.certificate: '/cert/fullchain.pem'
+  ssl.key: '/cert/privkey.pem'

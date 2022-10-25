@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  filebeat_access:
+    image: reg.brian-hong.tech/public/filebeat_access:latest
+    restart: always
+    volumes:
+      # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - log-data:/var/log/server
+      - /cert:/cert
+    container_name: filebeat_access
+
+  filebeat_plain:
+    image: reg.brian-hong.tech/public/filebeat_plain:latest
+    restart: always
+    volumes:
+      # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - log-data:/var/log/server
+      - /cert:/cert
+    container_name: filebeat_plain
+
+  filebeat_bdscc:
+    image: reg.brian-hong.tech/public/filebeat_bdscc:latest
+    restart: always
+    volumes:
+      # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - log-data:/var/log/server
+      - /cert:/cert
+    container_name: filebeat_bdscc
+
+  my-backend:
+    image: reg.brian-hong.tech/public/test_backend:latest
+    restart: always
+    volumes:
+      - log-data:/data/logs
+      - ./backend/config:/data/config
+      - ./backend/src:/data/src
+      - ./backend/models:/data/models
+    container_name: backend
+    ports:
+      - 3000:3000
+
+volumes:
+  log-data:
