@@ -45,6 +45,8 @@ services:
       - ./backend/src:/data/src
       - ./backend/models:/data/models
     container_name: backend
+    env_file:
+      - ./backend/.env
     ports:
       - 3000:3000
 
