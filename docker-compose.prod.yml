@@ -8,6 +8,7 @@ services:
       # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - log-data:/var/log/server
       - /cert:/cert
+      - /etc/localtime:/etc/localtime:ro
     container_name: filebeat_access
 
   filebeat_plain:
@@ -17,6 +18,7 @@ services:
       # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - log-data:/var/log/server
       - /cert:/cert
+      - /etc/localtime:/etc/localtime:ro
     container_name: filebeat_plain
 
   filebeat_bdscc:
@@ -26,6 +28,7 @@ services:
       # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - log-data:/var/log/server
       - /cert:/cert
+      - /etc/localtime:/etc/localtime:ro
     container_name: filebeat_bdscc
 
   my-backend:
@@ -36,6 +39,7 @@ services:
       - ./backend/config:/data/config
       - ./backend/src:/data/src
       - ./backend/models:/data/models
+      - /etc/localtime:/etc/localtime:ro
     container_name: backend
     env_file:
       - ./backend/.env
